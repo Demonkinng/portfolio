@@ -1,0 +1,129 @@
+---
+import GitHub from "../components/icons/GitHub.astro";
+import LinkedIn from "../components/icons/LinkedIn.astro";
+
+const navItems = [
+  {
+    title: "home",
+    url: "/#home",
+  },
+  {
+    title: "projects",
+    url: "/#projects",
+  },
+  {
+    title: "about me",
+    url: "/#about-me",
+  },
+];
+
+const socialLinks = [
+  { label: "GitHub", href: "https://github.com/Demonkinng", icon: GitHub },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/angel-chuncho",
+    icon: LinkedIn,
+  },
+];
+---
+
+<header id="header" class="fixed top-0 z-30 left-0 right-0 backdrop-blur-md bg-black border-b border-white/10">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 py-4">
+    <nav class="flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="group flex items-center gap-3">
+        <span class="font-mono text-base">
+          <span class="text-cyan-600">{"<"}</span>
+          <span class="font-semibold text-white">ADCJ</span>
+          <span class="text-cyan-600">{" />"}</span>
+        </span>
+      </a>
+
+      <!-- Navigation -->
+      <div class="hidden items-center gap-10 md:flex">
+        {
+          navItems.map((link) => (
+            <a
+              href={link.url}
+              aria-label={link.title}
+              data-section={link.url}
+              class="nav-link group relative px-2 py-2 font-mono text-sm uppercase tracking-widest rounded-lg transition-colors text-gray-500 hover:text-white"
+            >
+              {link.title}
+              <span
+                class={
+                  "nav-underline absolute bottom-1 left-1/2 -translate-x-1/2 h-0.5 w-0 rounded-full bg-cyan-500 transition-all duration-300 group-hover:w-6"
+                }
+              />
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Social Links -->
+      <div class="hidden items-center gap-1 sm:flex">
+        {
+          socialLinks.map((link) => (
+            <a
+              class="group relative flex size-9 items-center justify-center rounded-lg text-gray-500 hover:text-cyan-500 hover:bg-cyan-500/20"
+              href={link.href}
+              aria-label={link.label}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <link.icon class="size-4.75 group-hover:scale-110" />
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- TODO: Implement Toggle Theme -->
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-link.active {
+    color: #06b6d4;
+  }
+  .nav-link.active .nav-underline {
+    width: 24px;
+  }
+</style>
+
+<script>
+  const navLinks = document.querySelectorAll(".nav-link");
+  const sections = document.querySelectorAll("section");
+
+  const observerOptions = {
+    root: null,
+    rootMargin: "-50% 0px -40% 0px",
+    threshold: 0,
+  };
+
+  const observerCallback = (entries: IntersectionObserverEntry[]) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute("id");
+        
+        navLinks.forEach((link) => {
+          link.classList.remove("active", "text-cyan-500");
+          link.classList.add("text-gray-500");
+
+          if (link.getAttribute("href") === `/#${id}`) {
+            link.classList.add("active", "text-cyan-500");
+            link.classList.remove("text-gray-500");
+          }
+        });
+      }
+    });
+  };
+
+  const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+  sections.forEach((section) => observer.observe(section));
+
+  document.addEventListener("astro:after-swap", () => {
+    sections.forEach((section) => observer.observe(section));
+  });
+</script>
