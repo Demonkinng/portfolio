@@ -1,0 +1,73 @@
+---
+import Image from "astro/components/Image.astro";
+import LinkButton from "./LinkButton.astro";
+import GitHub from "./icons/GitHub.astro";
+import ExternalLink from "./icons/ExternalLink.astro";
+
+interface Props {
+  title: string;
+  tagline: string;
+  description: string;
+  image: string;
+  tags: Array<{
+    name: string;
+    class: string;
+    icon: any;
+  }>;
+  link?: string;
+  github: string;
+}
+
+const { title, tagline, description, image, tags, link, github } = Astro.props;
+---
+
+<div class="group relative rounded-lg border border-[#12161d] bg-[#020307] overflow-hidden transition-all duration-300 hover:scale-[1.02] h-full flex flex-col">
+  <Image
+    src={image}
+    alt={`Screenshot of ${title} project`}
+    width={400}
+    height={200}
+    class="w-full h-60 object-cover"
+  />
+  <!-- Header card -->
+  <div class="flex flex-col space-y-1.5 p-6 pb-3">
+    <h3 class="text-xl font-semibold leading-none tracking-tight">{title}</h3>
+    <p class="text-sm text-gray-500">{tagline}</p>
+    <!-- Techs Pills -->
+    <div class="flex flex-wrap gap-2">
+      <ul class="flex flex-wrap gap-2 mb-2">
+        {
+          tags.map((tag) => (
+            <li class={`flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium ${tag.class}`}>
+              <tag.icon class="size-4" />
+              {tag.name}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+  <!-- Content card -->
+  <div class="flex-1 space-y-4 p-6 pt-0">
+    <p class="text-base text-gray-500 leading-relaxed">{description}</p>
+  </div>
+  <!-- Footer card -->
+  <div class="flex items-center justify-center p-6 gap-2 pt-4">
+    {
+      link && (
+        <LinkButton href={link} class="flex-1">
+          <ExternalLink class="size-4" />
+          Preview
+        </LinkButton>
+      )
+    }
+    {
+      github && (
+        <LinkButton href={github} class="flex-1">
+          <GitHub class="size-4" />
+          Code
+        </LinkButton>
+      )
+    }
+  </div>
+</div>

@@ -1,51 +1,95 @@
 ---
-import Project from "./icons/Project.astro"
+import Project from "./icons/Project.astro";
+import ProjectCard from "./ProjectCard.astro";
+import Mongo from "./icons/Mongo.astro";
+import Express from "./icons/Express.astro";
+import React from "./icons/React.astro";
+import Node from "./icons/Node.astro";
+import Tailwind from "./icons/Tailwind.astro";
+
+const TAGS = {
+  MONGO: {
+    name: "MongoDB",
+    class: "bg-[#0F2A1B] text-white",
+    icon: Mongo,
+  },
+  EXPRESS: {
+    name: "Express.js",
+    class: "bg-black text-white",
+    icon: Express,
+  },
+  REACT: {
+    name: "React",
+    class: "bg-[#0B2A3A] text-white",
+    icon: React,
+  },
+  NODE: {
+    name: "Node.js",
+    class: "bg-[#0F2E1B] text-white",
+    icon: Node,
+  },
+  TAILWIND: {
+    name: "Tailwind CSS",
+    class: "bg-[#003159] text-white",
+    icon: Tailwind,
+  },
+};
+
+const PROJECTS = [
+  {
+    title: "GGRaiders",
+    tagline: "E-commerce platform built with MERN stack",
+    description:
+      "Desarrollo de una plataforma de comercio electrónico moderna y escalable, simulando una tienda de componentes de PC. El proyecto se construyó bajo una arquitectura Full Stack utilizando el stack MERN.",
+    link: "https://ggraiders-ecommerce-frontend.vercel.app/",
+    github: "https://github.com/Demonkinng/ggraiders-ecommerce",
+    image: "/projects/ggraiders-screenshot.webp",
+    tags: [TAGS.MONGO, TAGS.EXPRESS, TAGS.REACT, TAGS.NODE],
+  },
+  {
+    title: "TechCore",
+    tagline: "A modern web application built with React",
+    description: "A brief description of the project goes here.",
+    github: "https://github.com/Demonkinng/TechCore",
+    image: "/projects/techcore-screenshot.webp",
+    tags: [TAGS.REACT, TAGS.TAILWIND],
+  },
+  {
+    title: "Centinela",
+    tagline: "A full stack application using Node.js and MongoDB",
+    description: "A brief description of the project goes here.",
+    link: "#",
+    github: "#",
+    image: "/projects/ggraiders-screenshot.webp",
+    tags: [TAGS.MONGO, TAGS.EXPRESS, TAGS.REACT, TAGS.NODE],
+  },
+];
 ---
 
-<section id="projects" class="px-4 sm:px-6 py-16 sm:py-24 lg:py-28 bg-black text-white">
+<section
+  id="projects"
+  class="px-4 sm:px-6 py-16 sm:py-24 lg:py-28 bg-black text-white"
+>
   <div class="mx-auto max-w-7xl">
-    <h2
-      class="text-3xl font-bold tracking-tight sm:text-4xl text-balance mb-12"
-    >
-      <Project />
+    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-balance mb-12">
+      <Project class="text-cyan-500" />
       Projects
     </h2>
 
     <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-      <!-- Project 1 -->
-      <div
-        class="group relative rounded-lg border border-gray-700 bg-gray-800 p-6 transition-transform hover:scale-[1.02]"
-      >
-        <h3 class="text-xl font-semibold mb-2">Project One</h3>
-        <p class="text-gray-400 mb-4">
-          A brief description of the project goes here.
-        </p>
-        <a href="#" class="text-cyan-500 hover:underline">View Details</a>
-      </div>
-
-      <!-- Project 2 -->
-      <div
-        class="group relative rounded-lg border border-gray-700 bg-gray-800 p-6 transition-transform hover:scale-[1.02]"
-      >
-        <h3 class="text-xl font-semibold mb-2">Project Two</h3>
-        <p class="text-gray-400 mb-4">
-          A brief description of the project goes here.
-        </p>
-        <a href="#" class="text-cyan-500 hover:underline">View Details</a>
-      </div>
-
-      <!-- Project 3 -->
-      <div
-        class="group relative rounded-lg border border-gray-700 bg-gray-800 p-6 transition-transform hover:scale-[1.02]"
-      >
-        <h3 class="text-xl font-semibold mb-2">Project Three</h3>
-        <p class="text-gray-400 mb-4">
-          A brief description of the project goes here.
-        </p>
-        <a href="#" class="text-cyan-500 hover:underline">View Details</a>
-      </div>
-
-      <!-- Add more projects as needed -->
+      {
+        PROJECTS.map(({ image, title, tagline, description, tags, link, github }) => (
+          <ProjectCard
+            image={image}
+            title={title}
+            tagline={tagline}
+            description={description}
+            tags={tags}
+            link={link}
+            github={github}
+          />
+        ))
+      }
     </div>
   </div>
 </section>
