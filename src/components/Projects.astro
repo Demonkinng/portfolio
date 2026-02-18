@@ -66,30 +66,23 @@ const PROJECTS = [
 ];
 ---
 
-<section
-  id="projects"
-  class="px-4 sm:px-6 py-16 sm:py-24 lg:py-28 bg-black text-white"
->
-  <div class="mx-auto max-w-7xl">
-    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-balance mb-12">
-      <Project class="text-cyan-500" />
-      Projects
-    </h2>
+<h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-balance mb-12">
+  <Project class="text-cyan-500" />
+  Projects
+</h2>
 
-    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
-      {
-        PROJECTS.map(({ image, title, tagline, description, tags, link, github }) => (
-          <ProjectCard
-            image={image}
-            title={title}
-            tagline={tagline}
-            description={description}
-            tags={tags}
-            link={link}
-            github={github}
-          />
-        ))
-      }
-    </div>
-  </div>
-</section>
+<div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+  {
+    PROJECTS.map(({ image, title, tagline, description, tags, link, github }) => (
+      <ProjectCard
+        image={image}
+        title={title}
+        tagline={tagline}
+        description={description}
+        tags={tags}
+        link={link}
+        github={github}
+      />
+    ))
+  }
+</div>

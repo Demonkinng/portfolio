@@ -1,0 +1,16 @@
+---
+interface Props {
+  id?: string;
+  sectionClass?: string;
+  paddingClass?: string;
+  containerClass?: string;
+}
+
+const { id, sectionClass = "", paddingClass = "py-16 sm:py-24 lg:py-28", containerClass = "" } = Astro.props;
+---
+
+<section id={id} class={`px-4 sm:px-6 bg-black text-white ${paddingClass} ${sectionClass}`}>
+  <div class={`mx-auto max-w-7xl ${containerClass}`}>
+    <slot />
+  </div>
+</section>
