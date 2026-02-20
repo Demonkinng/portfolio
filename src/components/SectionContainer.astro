@@ -6,7 +6,7 @@ interface Props {
   containerClass?: string;
 }
 
-const { id, sectionClass = "", paddingClass = "py-16 sm:py-24 lg:py-28", containerClass = "" } = Astro.props;
+const { id, sectionClass = "", paddingClass = "py-14 sm:py-22 lg:py-26", containerClass = "" } = Astro.props;
 ---
 
 <section id={id} class={`px-4 sm:px-6 bg-black text-white ${paddingClass} ${sectionClass}`}>
