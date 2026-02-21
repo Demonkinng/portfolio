@@ -3,22 +3,33 @@ import Experience from "./Experience.astro"
 import User from "./icons/User.astro"
 ---
 
-<div class="grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center">
-  <!-- Left column - Experience -->
-  <div class="flex justify-center">
-    <Experience />
+<div class="grid gap-10 lg:grid-cols-[1fr,1.05fr] lg:gap-14 xl:gap-20 items-start">
+  <div class="order-2 lg:order-1 space-y-6">
+    <header class="flex items-center gap-3">
+      <User class="size-7 text-cyan-400" />
+      <h2 class="text-3xl font-bold tracking-tight sm:text-4xl text-white">About Me</h2>
+    </header>
+
+    <div class="space-y-4 text-base sm:text-lg leading-relaxed text-gray-200 text-pretty">
+      <p>
+        I'm a Software Engineering student from Ecuador, with a love for crafting elegant and 
+        efficient code. With experience in both frontend and backend development, 
+        I enjoy building full-stack applications that solve real-world problems.
+      </p>
+    </div>
   </div>
 
-  <!-- Right column - Description -->
-  <div class="space-y-8 sm:space-y-10">
-    <h2 class="flex items-center gap-x-3 mb-6 text-3xl font-bold tracking-tight sm:text-4xl text-balance">
-      <User class="size-8 text-cyan-500" />
-      About Me
-    </h2>
-    <p class="max-w-lg text-xl sm:text-2xl leading-relaxed text-gray-500">
-      I'm a Software Engineering student from Ecuador, with a love for crafting elegant and
-      efficient code. With experience in both frontend and backend development,
-      I enjoy building full-stack applications that solve real-world problems.
-    </p>
+  <div class="order-1 lg:order-2">
+    <div class="rounded-3xl border border-white/10 bg-white/5 p-6 sm:p-8 shadow-xl shadow-cyan-500/10">
+      <div class="flex items-start justify-between gap-4 pb-5 border-b border-white/5">
+        <div>
+          <p class="text-sm font-semibold uppercase tracking-[0.14em] text-cyan-300">Experience</p>
+          <h3 class="mt-1 text-2xl font-bold text-white sm:text-3xl">Recent Trajectory</h3>
+        </div>
+      </div>
+      <div class="mt-6 space-y-4">
+        <Experience />
+      </div>
+    </div>
   </div>
 </div>
