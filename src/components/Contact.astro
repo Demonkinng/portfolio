@@ -1,27 +1,39 @@
-<div class="grid gap-12 lg:grid-cols-2 lg:gap-20 lg:items-center">
-  <!-- Left column - Image -->
-  <div class="flex justify-center">
-    <img
-      src="/contact/contact.webp"
-      alt="Contact illustration"
-      class="w-3/4 sm:w-2/3 lg:w-[55%] rounded-lg object-cover"
-    />
-  </div>
+---
+import ContactIcon from "./icons/Contact.astro";
+import GitHub from "./icons/GitHub.astro";
+import LinkedIn from "./icons/LinkedIn.astro";
+import ExternalLink from "./icons/ExternalLink.astro";
+import SocialPill from "./SocialPill.astro";
 
-  <!-- Right column - Description -->
-  <div class="space-y-8 sm:space-y-10">
-    <h2 class="text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl text-balance">
-      Contact Me
-    </h2>
-    <p class="max-w-lg text-xl sm:text-2xl leading-relaxed text-gray-500">
-      I'm always open to new opportunities and collaborations. Whether you have
-      a project in mind, want to discuss potential job opportunities, or just
-      want to say hello, feel free to reach out to me. You can contact me via
-      email at <a
-        href="mailto:contact@example.com"
-        class="text-blue-400 hover:text-blue-300">contact@example.com</a
-      > or connect with me on LinkedIn and GitHub. I look forward to hearing from
-      you!
-    </p>
+const EMAIL = "angel.chuncho@hotmail.com";
+const LINKEDIN = "https://linkedin.com/in/angel-chuncho";
+const GITHUB = "https://github.com/Demonkinng";
+---
+<div class="space-y-6">
+  <h2 class="flex items-center gap-x-3 text-3xl font-bold tracking-tight sm:text-4xl text-balance">
+    <ContactIcon class="size-7.5 text-cyan-500" />
+    Contact
+  </h2>
+
+  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-[1.05fr,0.95fr] lg:items-start">
+    <div class="text-2xl font-bold leading-tight text-white sm:text-3xl lg:text-4xl">
+      <span class="text-white">Let's build something </span>
+      <span class="bg-linear-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent">together</span>
+    </div>
+
+    <div class="flex flex-col gap-3">
+      <SocialPill href={`mailto:${EMAIL}`}>
+        <ExternalLink class="size-4" />
+        Email
+      </SocialPill>
+      <SocialPill href={LINKEDIN}>
+        <LinkedIn class="size-4" />
+        LinkedIn
+      </SocialPill>
+      <SocialPill href={GITHUB}>
+        <GitHub class="size-4" />
+        GitHub
+      </SocialPill>
+    </div>
   </div>
 </div>

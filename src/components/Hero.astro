@@ -48,65 +48,57 @@ const roles = [
   </div>
 
   <!-- Right column - Image Stick -->
-  <div class="flex justify-end">
-    <Image class="w-3/4 sm:w-2/3 lg:w-[55%]" src={heroImage} alt="Hero" />
+  <div class="flex justify-center lg:justify-end">
+    <Image
+      class="h-auto w-2/3 max-w-65 sm:max-w-sm lg:max-w-md xl:max-w-lg"
+      src={heroImage}
+      alt="Hero"
+      sizes="(min-width:1280px) 480px, (min-width:1024px) 360px, (min-width:640px) 320px, 240px"
+    />
   </div>
 </div>
 
-<!-- Scroll indicator -->
-<div class="absolute bottom-4 left-1/2 -translate-x-1/2">
-  <!-- <div class="mouse-scroll relative w-8 h-16 border-2 border-solid border-gray-500 rounded-3xl">
-      <div class="absolute size-1.5 rounded-[50%] bg-gray-500 left-1/2 -translate-x-1/2 animate-[scroll_2.5s_infinite] top-[80%]">
-      </div>
-    </div> -->
-  <div class="arrow-scroll relative h-16">
-    <div class="arrow absolute inline-block border-r-[5px] border-b-[5px] border-solid border-gray-500 p-3 top-0 left-1/2 -translate-x-1/2 rotate-45"></div>
-    <div class="arrow absolute inline-block border-r-[5px] border-b-[5px] border-solid border-gray-500 p-3 top-0 left-1/2 -translate-x-1/2 rotate-45"></div>
-    <div class="arrow absolute inline-block border-r-[5px] border-b-[5px] border-solid border-gray-500 p-3 top-0 left-1/2 -translate-x-1/2 rotate-45"></div>
-  </div>
+<script>
+  const el = document.getElementById("typing-text");
+  if (el) {
+    const roles: string[] = JSON.parse(el.dataset.roles || "[]");
+    let currentRole = 0;
+    let displayText = "";
+    let isDeleting = false;
 
-  <script>
-    const el = document.getElementById("typing-text");
-    if (el) {
-      const roles: string[] = JSON.parse(el.dataset.roles || "[]");
-      let currentRole = 0;
-      let displayText = "";
-      let isDeleting = false;
+    function updateText(text: string) {
+      el!.textContent = text || "\u00A0";
+    }
 
-      function updateText(text: string) {
-        el!.textContent = text || "\u00A0";
-      }
+    function tick() {
+      const targetText = roles[currentRole];
 
-      function tick() {
-        const targetText = roles[currentRole];
-
-        if (!isDeleting) {
-          if (displayText.length < targetText.length) {
-            displayText = targetText.slice(0, displayText.length + 1);
-            updateText(displayText);
-            setTimeout(tick, 100);
-          } else {
-            // Pause before deleting
-            setTimeout(() => {
-              isDeleting = true;
-              tick();
-            }, 2000);
-          }
+      if (!isDeleting) {
+        if (displayText.length < targetText.length) {
+          displayText = targetText.slice(0, displayText.length + 1);
+          updateText(displayText);
+          setTimeout(tick, 100);
         } else {
-          if (displayText.length > 0) {
-            displayText = displayText.slice(0, -1);
-            updateText(displayText);
-            setTimeout(tick, 50);
-          } else {
-            isDeleting = false;
-            currentRole = (currentRole + 1) % roles.length;
-            setTimeout(tick, 100);
-          }
+          // Pause before deleting
+          setTimeout(() => {
+            isDeleting = true;
+            tick();
+          }, 2000);
+        }
+      } else {
+        if (displayText.length > 0) {
+          displayText = displayText.slice(0, -1);
+          updateText(displayText);
+          setTimeout(tick, 50);
+        } else {
+          isDeleting = false;
+          currentRole = (currentRole + 1) % roles.length;
+          setTimeout(tick, 100);
         }
       }
-
-      updateText("");
-      tick();
     }
-  </script>
-</div>
+
+    updateText("");
+    tick();
+  }
+</script>
